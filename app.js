@@ -1,26 +1,40 @@
-function Animal (edad) {
-  this.edad = edad;
-}
- 
-Animal.prototype.crecer = function () {
-  this.edad = this.edad + 1;
-  return this.edad;
-};
- 
-var iris = new Animal(3);
+MyModel = Backbone.Model.extend({
+	initialize:function(){
+		this.on("change",function(){
+			console.log("model changed");
+		});
+	},
+	defaults:{
+		name:'anthony',
+		author:'webster'
+	},
+	printDetails:function(){
+		console.log("Test de funciones: ",this.get('name'));
+	}
+});
 
-function Felino () {
-}
- 
-Felino.prototype = new Animal(3);
+Model = new MyModel({name:'carlos'});
 
-Felino.prototype.constructor = Felino;
-console.log(Felino.constructor());
- 
-// Felino.prototype.maullar = function () {
-//   console.log('meowwwww');
-// };
- 
-// var iris = new Felino();
-// iris.crecer();
-// iris.maullar();
+Model.set('name','anthony');
+Model.set('year',2014);
+
+var clone = Model.clone();
+
+// console.log("verificando si existe una propiedad:",Model.has('lastname'));
+// console.log(Model.attributes);
+// console.log(clone.attributes);
+
+//Model.printDetails();
+
+
+$(function(){
+	var i=0;
+	$('h1').on('click',function(){
+		i++;
+		Model.set('testering'+i,i);
+		console.log(Model.attributes);
+	});
+})
+
+
+
