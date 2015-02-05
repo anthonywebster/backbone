@@ -1,7 +1,9 @@
 
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
+var express = require('express'),
+	app = express(),
+	bodyParser = require('body-parser'),
+	methodOverride = require('method-override'),
+	mongoose = require('mongoose');
 
 app.use(bodyParser.urlencoded({ extended: false}));
 
@@ -31,6 +33,10 @@ function removeBook(id){
 var books = [
 {id: 98, author: 'Stephen King', title: 'The Shining', year: 1977},
 {id: 99, author: 'George Orwell', title: 1949}];
+
+app.get('/',function(request,response){
+	response.send("Hola");
+});
 
 app.get('/books', function (request, response) {
  
