@@ -1,10 +1,39 @@
 
 var 
 express = require('express'),
+
 app = express(),
+
 bodyParser = require('body-parser'),
+
 methodOverride = require('method-override'),
+
 mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/myappdatabase',function(err,res){
+	if(err) {
+		console.log("Error: conectando a la base de datos");
+	} else {
+
+		console.log("connected data base");
+	}
+});
+
+var User = require('./models/tvshow');
+
+var chris = new User({
+  name: 'Chris',
+  username: 'sevilayha',
+  password: 'password' 
+});
+
+chris.save(function(err) {
+  if (err) throw err;
+
+  console.log('User saved successfully!');
+});
+
+all = 
 
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
