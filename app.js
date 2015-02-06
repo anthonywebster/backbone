@@ -30,34 +30,31 @@ MyModel = Backbone.Model.extend({
 	}
 });
 
-Model = new MyModel({name:'carlos'});
+var Post = Backbone.Model.extend({
+	urlRoot:'http://jsonplaceholder.typicode.com/posts/'
+});
 
-Model.set('year', 1999, {validate: true});
+var Posts = new Post();
 
-console.log('Check year change: ' + Model.get('val'));
+// Posts.fetch({
+// 	success:function(model,response,options){
+// 		console.log(response);
+// 	}
+// });
 
+Posts.set('title','Prueba con backbone');
 
-// var clone = Model.clone();
+Posts.set('title',"que onda carlos");
 
-// console.log("verificando si existe una propiedad:",Model.has('lastname'));
-// console.log(Model.attributes);
-// console.log(clone.attributes);
-
-//Model.printDetails();
-
-// Model.set('name','Different Book'); //change handler invoked
-
-// Model.set('name', 'Different Book', {silent:true});//no change handler invoked 
-
-
-$(function(){
-	var i=0;
-	$('h1').on('click',function(){
-		i++;
-		Model.set('testering'+i,i);
-		console.log(Model.attributes);
-	});
-})
+Posts.save(Posts.attributes,{
+	success:function(model,reponse,options){
+		console.log('Model Saved');
+		console.log(Posts.attributes);
+	},
+	error:function(model,xhr,options){
+		console.log("Failed to save model");
+	}
+}); 
 
 
 
