@@ -19,9 +19,9 @@ mongoose.connect('mongodb://localhost/myappdatabase',function(err,res){
 	}
 });
 
-var User = require('./models/tvshow');
+var Movie = require('./models/tvshow');
 
-var chris = new User({
+var chris = new Movie({
   name: 'Chris',
   username: 'sevilayha',
   password: 'password' 
