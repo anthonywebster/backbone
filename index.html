@@ -3,13 +3,26 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<style>
+		html,body{height: 100%;background-color: #234;}
+		.container-fluid{height: 100%}
+		.container{background-color: #eee;padding: 10px;min-height: 100%;}
+	</style>
 </head>
 <body>
-	<h1>Hola</h1>
+	<div class="container-fluid">
+		<div class="side-bar">
+			hola
+		</div>
+		<div class="container">
+			
+			<span class="btn btn-info add-post">Añadir un post</span>
+		</div>
+	</div>
 </body>
 <script src="js/jquery-1.11.2.min.js"></script>
-<script src="js/underscore-min.js"></script>
+<script src="js/lodash.js"></script>
 <script src="js/backbone-min.js"></script>
 <script src="app.js"></script>
 </html>
