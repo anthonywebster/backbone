@@ -8,64 +8,50 @@ var Post = Backbone.Model.extend({
 });
 
 
-var Posts = new Post();
-
-$('.add-post').on('click',function(){
-
-	
-	Posts.set('title','Prueba con backbone');
-
-	Posts.save(Posts.attributes,{
-		success:function(model,reponse,options){
-			console.log('Model Saved');
-			console.log(Posts.attributes);
-		},
-		error:function(model,xhr,options){
-			console.log("Failed to save model");
-		}
-	}); 
-})
-
-
-// Posts.fetch({
-// 	success:function(model,response,options){
-// 		// console.log(response);
-// 	}
-// });
-
-
-
 var Page = Backbone.Collection.extend({
 	model:Post,
 	url:'http://jsonplaceholder.typicode.com/posts',
 	wait:true,
 });
 
-Posts1 = new Post({'title':'primer array'});
-Posts2 = new Post({'title':'primer array'});
-Posts3 = new Post({'title':'primer array'});
+var bookOne = new Post({name: 'Beginning Backbone', author: 'James Sugrue', year: 2013});
 
+var bookTwo = new Post({name: 'Pro Javascript Design Patterns', author:'Dustin Diaz',year: 2012});
 
-var data = [
-{'title':'hola'}
-];
+MyPage = new Page([bookOne,bookTwo]);
 
-MyPage = new Page;
+MyPage.fetch();
 
-// MyPage.add([Posts1,Posts2]);
+postviews = Backbone.View.extend({
+	collection:MyPage,
 
-// MyPage.add([{name: "Flying Dutchman"},
-//   {name: "Black Pearl"}]);
+	tagName:'li',
+		
+	attributes:{'data-date':new Date()},
+	
+	initialize:function() {this.render(this)},
+	
+	render:function(_this){
 
-MyPage.fetch({
-	success:function(model,response,options){
-		console.log(model);
-	},
+		test = {hola:"query"};
+		
+		_.forEach(this.collection,function(value,key,context,context){
+			// $(this.el).append('<li>'+context.at(key).get('name')+'</li>');
+			console.log(_this.el,this);
+		});
+		
+		// this.$el.html("<li>hola</li>");
+
+		return this;
+	}
+
 });
 
-// MyPage.remove(Posts3);
+myView = new postviews();
 
-console.log(MyPage);
+console.log(myView.el);
+
+
 
 
 
